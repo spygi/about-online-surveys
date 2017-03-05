@@ -6,20 +6,23 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait # available since 2.4.0
 from selenium.webdriver.support import expected_conditions as EC # available since 2.26.0
 
-desired_cap = {'browser': 'Chrome', 'browser_version': '56.0', 'os': 'OS X', 'os_version': 'Sierra', 'resolution': '1024x768'}
-
 driver = webdriver.Chrome()
 
-driver.implicitly_wait(8) # seconds
+# or, if you want a remote browser
+# desired_cap = {'browser': 'Chrome', 'browser_version': '56.0', 'os': 'Windows', 'os_version': '7', 'resolution': '1024x768'}
+# driver = webdriver.Remote(
+#    command_executor='http://ACCOUNT:IDENTIFIER@hub.browserstack.com:80/wd/hub',
+#    desired_capabilities=desired_cap)
 
-driver.get("THIS IS A SITE WHICH I WON'T TELL YOU")
-# Not required but cool to know: driver.execute_script("window.scrollTo(0, 1110);")
+driver.get("SECRET SITE I WON'T TELL YOU")
+driver.execute_script("window.scrollTo(0, 1170);") # it IS required it turns out
 try:
     driver.switch_to_frame(driver.find_element_by_class_name("mv-widget-iframe"));
-    element = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CLASS_NAME, "Option-inner-index-5")))
+    element = WebDriverWait(driver, 8).until(EC.element_to_be_clickable((By.CLASS_NAME, "Option-inner-index-5")))
     element = driver.find_element_by_class_name("Option-inner-index-5")
     element.click()
-    # driver.save_screenshot('screenshot.png')
+    # optional: driver.save_screenshot('screenshot.png')
 finally:
+    # optional for screenshot to appear: WebDriverWait(driver, 1)
     driver.quit()
 
