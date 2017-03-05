@@ -40,8 +40,9 @@ I had almost no idea how to use it, so [copy-pasta](https://www.browserstack.com
 ```driver.find_element_by_class_name``` didn't work, NoSuchElementException.. WTF?
 OK, maybe it hasn't loaded yet (I had noticed in the site it does take some time to load the pics). I tried both explicit and implicit waits.. Nada.
 
-If only I could see what the test sees... ```driver.save_screenshot('screenshot.png')``` BAOUM. 
+If only I could see what the test sees... ```driver.save_screenshot('screenshot.png')``` BAOUM.
 ![Screenshot from IE7 on XP](./IEscreenshot.png)
+
 Why does it look like shiaaa... Oh, ```desired_cap = {'os': 'Windows', 'os_version': 'xp', 'browser': 'IE', 'browser_version': '7.0' }``` that's why! Middle finger to you too sample code.
 
 Changing to Chrome, the screenshot looks normal now but the element I want to click is not visible, you have to scroll down.. is Browserstack that stupid? Anyway, ```driver.execute_script("window.scrollTo(0, 1110);")``` (yes, you can run JS from the driver - awesome!) Btw, Browserstack is not that stupid, I was :)
